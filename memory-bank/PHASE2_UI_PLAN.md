@@ -15,13 +15,15 @@
 - [x] Full-screen image display (centered, max size)
 - [x] Dark, semi-transparent background
 - [x] Basic left/right navigation (arrows, keyboard, swipe)
-- [x] Minimal progress indicator (bar or dots)
+- [ ] Minimal progress indicator (bar or dots) *(removed for now; revisit later with Framer Motion or advanced UI)*
 - [x] Responsive for mobile (touch/swipe, large tap targets)
 
-### **Phase 2.2: Image Info Overlay**
-- [ ] Fade-in overlay on hover/tap
-- [ ] Show filename, tags, favorite/star button
-- [ ] Overlay hidden by default
+### **Phase 2.2: Playlist Gallery & Overlay Prep**
+- [x] Home page playlist gallery complete: clean, minimalist tile grid, robust full-viewport background (#032934), no white space, no playlist titles, hover effect only
+- [ ] Next: Implement playlist grid/album view (show all images in a selected playlist)
+- [ ] Add routing so clicking a playlist thumbnail opens its grid view
+
+*Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
 ### **Phase 2.3: Playlist/Folder Drawer**
 - [ ] Slide-out drawer/modal for folder/playlist selection

@@ -7,6 +7,9 @@ const imageList = [
 
 const basePath = "/slideshow-dataset/jessie-rogers/";
 
+// Placeholder tags for demo
+const placeholderTags = ["portrait", "outdoor", "favorite"];
+
 export default function Slideshow() {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef(null);
@@ -47,9 +50,9 @@ export default function Slideshow() {
 
   return (
     <div
-      className="fixed inset-0 flex flex-col items-center justify-center bg-black/95 select-none"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      className="fixed inset-0 flex flex-col items-center justify-center bg-black/95 select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <img
         src={imageUrl}
@@ -57,6 +60,7 @@ export default function Slideshow() {
         className="max-h-[90vh] max-w-[98vw] object-contain rounded shadow-lg transition-all duration-300"
         draggable={false}
       />
+
       {/* Navigation arrows */}
       <button
         className="absolute left-2 top-1/2 -translate-y-1/2 text-4xl md:text-5xl text-white/70 hover:text-white px-3 py-2 md:px-4 md:py-3 rounded-lg bg-black/10 md:bg-transparent focus:outline-none active:scale-95"
@@ -71,14 +75,6 @@ export default function Slideshow() {
         aria-label="Next"
       >&#8594;</button>
       {/* Progress indicator */}
-      <div className="absolute bottom-4 flex gap-1 justify-center w-full">
-        {imageList.map((_, i) => (
-          <div
-            key={i}
-            className={`h-1 rounded-full transition-all duration-300 ${i === index ? "w-8 bg-white/90" : "w-2 bg-white/40"}`}
-          />
-        ))}
-      </div>
     </div>
   );
 }

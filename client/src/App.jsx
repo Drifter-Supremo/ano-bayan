@@ -1,8 +1,8 @@
-import Slideshow from "./components/Slideshow";
+import Home from "./components/Home";
 import './App.css';
 
 function App() {
-  return <Slideshow />;
+  return <Home />;
 }
 
 export default App;
