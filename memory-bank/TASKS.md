@@ -12,16 +12,16 @@ A private, password-protected, fully animated slideshow web app for curated imag
 - [x] Set up root `package.json` (or separate for frontend/backend)  
 - [x] Add `.gitignore` and exclude `server/ano-bayan/` folder
 
-\#\#\# 1.2 Vite \+ React Setup  
-\- \[ \] Scaffold Vite app inside \`client/\`  
-\- \[ \] Install TailwindCSS  
-\- \[ \] Set up global layout \+ theme
+\#\#\# 1.2 Vite + React Setup  
+- [x] Scaffold Vite app inside `client/`  
+- [x] Install TailwindCSS  
+- [x] Set up global layout + theme
 
 \#\#\# 1.3 Express Server Setup  
-\- \[ \] Install Express and related packages in \`server/\`  
-\- \[ \] Add basic \`index.js\` or \`server.js\` entry point  
-\- \[ \] Configure static file serving for \`client/dist\`  
-\- \[ \] Set up Railway deployment config (e.g. \`PORT\`, \`start\` script)
+\- [ ] Install Express and related packages in `server/`  
+\- [ ] Add basic `index.js` or `server.js` entry point  
+\- [ ] Configure static file serving for `client/dist`  
+\- [ ] Set up Railway deployment config (e.g. `PORT`, `start` script)
 
 \---
 
