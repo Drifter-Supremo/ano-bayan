@@ -1,0 +1,10 @@
+# Ignore server-side images
+/server/ano-bayan/
+# Node dependencies
+/node_modules/
+# Production build
+/dist/
+# Environment variables
+.env
+# OS-specific files
+.DS_Store
