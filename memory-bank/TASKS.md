@@ -7,10 +7,10 @@ A private, password-protected, fully animated slideshow web app for curated imag
 \#\# 🔧 PHASE 1: PROJECT SETUP
 
 \#\#\# 1.1 Initialize Fullstack Project  
-\- \[ \] Create a \`client/\` folder for Vite \+ React frontend  
-\- \[ \] Create a \`server/\` folder for Express backend  
-\- \[ \] Set up root \`package.json\` (or separate for frontend/backend)  
-\- \[ \] Add \`.gitignore\` and exclude \`server/ano-bayan/\` folder
+- [x] Create a `client/` folder for Vite + React frontend  
+- [x] Create a `server/` folder for Express backend  
+- [x] Set up root `package.json` (or separate for frontend/backend)  
+- [x] Add `.gitignore` and exclude `server/ano-bayan/` folder
 
 \#\#\# 1.2 Vite \+ React Setup  
 \- \[ \] Scaffold Vite app inside \`client/\`  
