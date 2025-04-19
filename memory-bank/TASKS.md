@@ -18,10 +18,10 @@ A private, password-protected, fully animated slideshow web app for curated imag
 - [x] Set up global layout + theme
 
 \#\#\# 1.3 Express Server Setup  
-\- [ ] Install Express and related packages in `server/`  
-\- [ ] Add basic `index.js` or `server.js` entry point  
-\- [ ] Configure static file serving for `client/dist`  
-\- [ ] Set up Railway deployment config (e.g. `PORT`, `start` script)
+- [x] Install Express and related packages in `server/`  
+- [x] Add basic `index.js` or `server.js` entry point  
+- [x] Configure static file serving for `client/dist`  
+- [x] Set up Railway deployment config (e.g. `PORT`, `start` script)
 
 \---
 
