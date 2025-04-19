@@ -20,8 +20,10 @@
 
 ### **Phase 2.2: Playlist Gallery & Overlay Prep**
 - [x] Home page playlist gallery complete: clean, minimalist tile grid, robust full-viewport background (#032934), no white space, no playlist titles, hover effect only
-- [ ] Next: Implement playlist grid/album view (show all images in a selected playlist)
-- [ ] Add routing so clicking a playlist thumbnail opens its grid view
+- [x] Playlist grid/album view: shows all images in a selected playlist, robust to any backend response
+- [x] Routing: clicking a playlist thumbnail opens its grid view (`/playlist/:playlistName`)
+- [x] Error & empty state handling: friendly message for empty playlists, errors shown if API fails
+- [x] Modal accessibility: modal closes with Escape key, click outside, or close button
 
 *Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
