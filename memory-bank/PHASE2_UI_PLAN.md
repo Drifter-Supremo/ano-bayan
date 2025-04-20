@@ -27,6 +27,7 @@
 - [x] Navigation controls: prev/next arrows, keyboard, swipe enabled in slideshow
 - [x] Cinematic mode: autoplay with fade+zoom transitions, shuffle, play/pause controls
 - [x] Browser fullscreen toggle (F11 style) integrated
+- [x] Slideshow controls use SVG icons, refined styling, and auto-hide on inactivity
 
 *Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 

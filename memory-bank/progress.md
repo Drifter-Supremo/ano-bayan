@@ -35,7 +35,7 @@
 - **Playlist Page:** Loads and displays all images in a playlist from Firebase Storage.
 - **Logout:** Works and reloads to login screen.
 - **Playlist Drawer:** Slide-out folder selector with shuffle and logout implemented.
-- **Slideshow Animations:** Refactored `Slideshow` component handles preview (fade) and cinematic (fade+zoom, autoplay, shuffle) modes. Browser fullscreen toggle added.
+- **Slideshow UI/UX:** Refactored `Slideshow` component handles preview (fade) and cinematic (fade+zoom, autoplay) modes. Browser fullscreen toggle added. Controls use SVG icons and auto-hide on inactivity.
 
 ---
 
@@ -74,7 +74,7 @@
 
 ## **What Needs to be Done**
 
-- [x] **Slideshow/playlist navigation & cinematic mode implemented.**
+- [x] **Slideshow/playlist navigation, cinematic mode, and UI polish implemented.**
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
