@@ -23,6 +23,9 @@
 - Home page fetches playlists (folders) from Firebase Storage and displays the first image in each as a thumbnail.
 - Playlist page fetches all images in the selected playlist folder from Firebase Storage.
 
+### 4. **Slideshow/Playlist Navigation Restored**
+- Integrated prev/next buttons, keyboard arrow support, and swipe gestures into the playlist image modal using Firebase-loaded images.
+
 ---
 
 ## **Current State of the App**
@@ -73,7 +76,7 @@
 
 ## **What Needs to be Done**
 
-- [ ] **Restore slideshow/playlist navigation:**
+- [x] **Restore slideshow/playlist navigation:**
       - Add left/right navigation (arrows and keyboard) to the image modal in PlaylistGridView.
       - Integrate or refactor slideshow logic so it works with Firebase-loaded images.
 - [ ] **Add error handling and user feedback for login/image loading failures.**

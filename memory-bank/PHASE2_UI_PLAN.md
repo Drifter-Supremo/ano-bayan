@@ -24,6 +24,7 @@
 - [x] Routing: clicking a playlist thumbnail opens its grid view (`/playlist/:playlistName`)
 - [x] Error & empty state handling: friendly message for empty playlists, errors shown if API fails
 - [x] Modal accessibility: modal closes with Escape key, click outside, or close button
+- [x] Navigation controls: prev/next arrows, keyboard, swipe enabled in modal
 
 *Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
