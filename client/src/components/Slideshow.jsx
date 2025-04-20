@@ -67,7 +67,9 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   // Adjust duration based on orientation
   const onLoad = e => {
     const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-    setDuration(6000 + (h > w ? 2000 : h === w ? 1000 : 0));
+    const base = 5000; // New base: 5 seconds
+    const extra = h > w ? 1500 : h === w ? 750 : 0; // New extra times
+    setDuration(base + extra);
   };
 
   // Auto-play timer

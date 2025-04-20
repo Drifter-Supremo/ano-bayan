@@ -48,16 +48,7 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
             </li>
           ))}
         </ul>
-        <div className="mt-6">
-          <label className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              checked={shuffleEnabled}
-              onChange={toggleShuffle}
-            />
-            <span>Shuffle</span>
-          </label>
-        </div>
+        {/* Shuffle toggle removed */}
         <div className="mt-auto pt-4">
           <button
             className="w-full text-left text-sm py-1 hover:underline"

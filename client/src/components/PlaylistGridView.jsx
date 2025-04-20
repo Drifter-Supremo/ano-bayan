@@ -6,7 +6,7 @@ import Slideshow from "./Slideshow";
 
 const storage = getStorage(app);
 
-export default function PlaylistGridView({ shuffleEnabled }) {
+export default function PlaylistGridView() { // Removed shuffleEnabled prop
   const { playlistName } = useParams();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,16 +22,14 @@ export default function PlaylistGridView({ shuffleEnabled }) {
         const folderRef = ref(storage, `ano-bayan-images/${playlistName}`);
         const res = await listAll(folderRef);
         const urls = await Promise.all(res.items.map(i => getDownloadURL(i)));
-        setImages(shuffleEnabled
-          ? urls.sort(() => Math.random() - 0.5)
-          : urls);
+        setImages(urls); // Removed shuffle logic here
       } catch {
         setError("Failed to load images");
       }
       setLoading(false);
     }
     fetchImages();
-  }, [playlistName, shuffleEnabled]);
+  }, [playlistName]); // Removed shuffleEnabled dependency
 
   // Restore scroll position when slideshow closes
   useEffect(() => {

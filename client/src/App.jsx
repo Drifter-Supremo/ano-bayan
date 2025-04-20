@@ -9,21 +9,19 @@ import "./App.css";
 
 function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [shuffleEnabled, setShuffleEnabled] = useState(false);
-  const toggleShuffle = () => setShuffleEnabled(s => !s);
+  // Shuffle state is no longer needed here as it's handled internally by Slideshow
 
   return (
     <Router>
       <Drawer
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        shuffleEnabled={shuffleEnabled}
-        toggleShuffle={toggleShuffle}
+        // Removed shuffle props
       />
       <AppContent
         isDrawerOpen={isDrawerOpen}
         openDrawer={() => setIsDrawerOpen(true)}
-        shuffleEnabled={shuffleEnabled}
+        // Removed shuffle prop
       />
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
@@ -37,7 +35,7 @@ function App() {
         />
         <Route
           path="/playlist/:playlistName"
-          element={<PlaylistGridView shuffleEnabled={shuffleEnabled} />}
+          element={<PlaylistGridView />} // Removed shuffle prop
         />
       </Routes>
     </Router>
