@@ -29,9 +29,10 @@
 *Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
 ### **Phase 2.3: Playlist/Folder Drawer**
-- [ ] Slide-out drawer/modal for folder/playlist selection
-- [ ] Only visible on click or swipe from left
+- [x] Slide-out drawer/modal for folder/playlist selection (desktop only)
+- [x] Only visible on click (hamburger toggle, backdrop click to close)
 - [ ] Responsive drawer for mobile
+- [x] Shuffle option: toggle to randomize image order in the slideshow modal
 
 ### **Phase 2.4: Settings & Auth UI**
 - [x] Minimal login page and authentication guard (Supabase Google Auth)
