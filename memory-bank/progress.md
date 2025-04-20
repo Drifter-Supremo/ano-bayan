@@ -30,11 +30,11 @@
 
 ## **Current State of the App**
 
-- **Authentication:** Works with Firebase Google sign-in. Redirect after login is now in place.
+- **Authentication:** Works with Firebase Google sign-in (styled button). Redirect after login is now in place.
 - **Home Page:** Loads and displays playlists from Firebase Storage with thumbnails.
 - **Playlist Page:** Loads and displays all images in a playlist from Firebase Storage.
 - **Logout:** Works and reloads to login screen.
-- **Playlist Drawer:** Slide-out folder selector with shuffle and logout implemented.
+- **Playlist Drawer:** Slide-out folder selector and logout implemented (shuffle toggle removed).
 - **Slideshow UI/UX:** Refactored `Slideshow` component handles preview (fade) and cinematic (fade+zoom, autoplay) modes. Browser fullscreen toggle added. Controls use SVG icons and auto-hide on inactivity.
 
 ---
@@ -75,6 +75,9 @@
 ## **What Needs to be Done**
 
 - [x] **Slideshow/playlist navigation, cinematic mode, and UI polish implemented.**
+- [x] **Updated browser tab title and favicon.**
+- [x] **Styled Google login button.**
+- [x] **Removed shuffle toggle from drawer.**
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**

@@ -38,7 +38,8 @@
 - [x] Shuffle option: toggle to randomize image order in the slideshow modal
 
 ### **Phase 2.4: Settings & Auth UI**
-- [x] Minimal login page and authentication guard (Supabase Google Auth)
+- [x] Minimal login page and authentication guard (Firebase Google Auth)
+- [x] Styled Google Sign-in button with logo
 - [ ] Minimal menu (top-right) for login/logout, preferences
 - [ ] Only visible if logged in
 
