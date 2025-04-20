@@ -18,3 +18,5 @@ export const db = getFirestore(app);
 
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
 export const signOutGoogle = () => signOut(auth);
+
+export { app };

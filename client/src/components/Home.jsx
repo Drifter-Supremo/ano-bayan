@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { app } from "../firebase";
 import LogoutButton from "./LogoutButton";
+const storage = getStorage(app);
 
 export default function Home() {
   const [playlists, setPlaylists] = useState([]);
@@ -9,14 +11,34 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/api/playlists")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch playlists");
-        return res.json();
-      })
-      .then(setPlaylists)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+    async function fetchPlaylists() {
+      setLoading(true);
+      setError(null);
+      try {
+        // List all folders (playlists) in the bucket using Firebase
+        const rootRef = ref(storage, 'ano-bayan-images');
+        const folderRes = await listAll(rootRef);
+        const folders = folderRes.prefixes; // Array of folder references
+        // For each folder, get the first image as thumbnail
+        const playlistPromises = folders.map(async (folderRef) => {
+          const imagesRes = await listAll(folderRef);
+          const imageRefs = imagesRes.items;
+          if (!imageRefs.length) return null;
+          const thumbnailUrl = await getDownloadURL(imageRefs[0]);
+          return {
+            name: folderRef.name,
+            thumbnail: thumbnailUrl,
+            };
+          });
+        const playlistsWithThumbs = (await Promise.all(playlistPromises)).filter(Boolean);
+        setPlaylists(playlistsWithThumbs);
+      } catch (err) {
+        setError(err.message || "Failed to fetch playlists");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPlaylists();
   }, []);
 
   const navigate = useNavigate();

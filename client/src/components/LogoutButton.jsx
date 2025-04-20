@@ -1,9 +1,9 @@
 import React from "react";
-import { supabase } from "../supabaseClient";
+import { signOutGoogle } from "../firebase";
 
 export default function LogoutButton() {
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await signOutGoogle();
     window.location.reload(); // quick way to force re-check auth for testing
   };
 

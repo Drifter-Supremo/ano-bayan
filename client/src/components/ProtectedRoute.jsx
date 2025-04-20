@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -8,17 +9,14 @@ export default function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let mounted = true;
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (mounted) {
-        setUser(user);
-        setLoading(false);
-        if (!user) {
-          navigate("/login", { replace: true });
-        }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+      if (!user) {
+        navigate("/login", { replace: true });
       }
     });
-    return () => { mounted = false; };
+    return () => unsubscribe();
   }, [navigate]);
 
   if (loading) return <div>Loading...</div>;
