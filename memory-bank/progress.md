@@ -1,6 +1,6 @@
 # Ano Bayan Slideshow – Progress Log
 
-## Session Date: 2025-04-19
+## Session Date: 2025-04-20
 
 ---
 
@@ -35,14 +35,13 @@
 - **Playlist Page:** Loads and displays all images in a playlist from Firebase Storage.
 - **Logout:** Works and reloads to login screen.
 - **Playlist Drawer:** Slide-out folder selector with shuffle and logout implemented.
-- **Slideshow Animations:** Fade transitions implemented for slideshow modal.
+- **Slideshow Animations:** Refactored `Slideshow` component handles preview (fade) and cinematic (fade+zoom, autoplay, shuffle) modes. Browser fullscreen toggle added.
 
 ---
 
 ## **Broken & Missing Features / What Needs to be Fixed ASAP**
 
-1. **Slideshow/Playlist Navigation: Fixed**
-   - Navigation between images via arrow keys, buttons, keyboard events, and swipe gestures now fully functional and integrated with Firebase-loaded images.
+1. **Slideshow/Playlist Navigation:** Fully functional (arrows, keyboard, swipe).
 
 2. **User Experience Issues:**
    - After login, redirect to home page was missing (now fixed).
@@ -75,7 +74,7 @@
 
 ## **What Needs to be Done**
 
-- [x] **Slideshow/playlist navigation is fixed.**
+- [x] **Slideshow/playlist navigation & cinematic mode implemented.**
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**

@@ -24,7 +24,9 @@
 - [x] Routing: clicking a playlist thumbnail opens its grid view (`/playlist/:playlistName`)
 - [x] Error & empty state handling: friendly message for empty playlists, errors shown if API fails
 - [x] Modal accessibility: modal closes with Escape key, click outside, or close button
-- [x] Navigation controls: prev/next arrows, keyboard, swipe enabled in modal
+- [x] Navigation controls: prev/next arrows, keyboard, swipe enabled in slideshow
+- [x] Cinematic mode: autoplay with fade+zoom transitions, shuffle, play/pause controls
+- [x] Browser fullscreen toggle (F11 style) integrated
 
 *Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
@@ -42,7 +44,7 @@
 *Note: Auth now integrated with Supabase. Environment variable loading was fixed by placing .env in the client directory.*
 
 ### **Phase 2.5: Polish & Animations**
-- [x] Slideshow transitions with Framer Motion (fade, scale, slide)
+- [x] Slideshow transitions with Framer Motion (fade, fade+zoom)
 - [ ] Drawer open/close and backdrop animations
 - [ ] Playlist thumbnail hover and grid animations
 - [ ] Loading skeletons and progress indicators
