@@ -7,7 +7,7 @@ export default function LoginScreen() {
       <img
         src="/ano-bayan-landing-page-image.png"
         alt="Ano Bayan Landing"
-        className="w-48 h-48 object-contain mb-8 drop-shadow-lg rounded-xl"
+        className="w-80 h-80 object-contain mb-8 drop-shadow-lg rounded-xl"
         draggable={false}
       />
       <SupabaseAuthButton />

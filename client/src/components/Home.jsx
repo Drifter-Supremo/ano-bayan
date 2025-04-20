@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import LogoutButton from "./LogoutButton";
+
 export default function Home() {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +25,8 @@ export default function Home() {
   if (error) return <div className="text-center py-10 text-red-400">{error}</div>;
 
   return (
-    <div className="min-h-screen bg-[#032934] flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-[#032934] flex flex-col items-center justify-center relative">
+      <LogoutButton />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 py-12">
         {playlists.map((playlist) => (
           <div

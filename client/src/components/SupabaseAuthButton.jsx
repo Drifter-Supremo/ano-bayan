@@ -9,7 +9,7 @@ export default function SupabaseAuthButton() {
   return (
     <button
       onClick={handleLogin}
-      className="px-6 py-3 rounded bg-white text-black text-lg shadow hover:bg-gray-200 transition font-semibold"
+      className="px-4 py-2 rounded bg-white text-black text-base shadow hover:bg-gray-200 transition font-semibold"
     >
       Sign in with Google
     </button>
