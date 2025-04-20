@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
 import Slideshow from "./Slideshow";
@@ -13,6 +13,7 @@ export default function PlaylistGridView({ shuffleEnabled }) {
   const [error, setError] = useState(null);
   const [showSlideshow, setShowSlideshow] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
+  const scrollPos = useRef(0); // Store scroll position locally
 
   useEffect(() => {
     async function fetchImages() {
@@ -31,6 +32,17 @@ export default function PlaylistGridView({ shuffleEnabled }) {
     }
     fetchImages();
   }, [playlistName, shuffleEnabled]);
+
+  // Restore scroll position when slideshow closes
+  useEffect(() => {
+    if (!showSlideshow) {
+      // Need a slight delay for the browser to re-render the grid
+      // before attempting to scroll.
+      requestAnimationFrame(() => {
+         window.scrollTo(0, scrollPos.current);
+      });
+    }
+  }, [showSlideshow]);
 
   if (loading) {
     return <div className="text-center py-10 text-white/70">Loading images...</div>;
@@ -57,6 +69,8 @@ export default function PlaylistGridView({ shuffleEnabled }) {
             key={url}
             className="cursor-pointer rounded shadow-lg overflow-hidden"
             onClick={() => {
+              // Save scroll position before showing slideshow
+              scrollPos.current = window.pageYOffset || document.documentElement.scrollTop;
               setStartIndex(idx);
               setShowSlideshow(true);
             }}
