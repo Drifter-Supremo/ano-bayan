@@ -35,6 +35,7 @@
 - **Playlist Page:** Loads and displays all images in a playlist from Firebase Storage.
 - **Logout:** Works and reloads to login screen.
 - **Playlist Drawer:** Slide-out folder selector with shuffle and logout implemented.
+- **Slideshow Animations:** Fade transitions implemented for slideshow modal.
 
 ---
 
