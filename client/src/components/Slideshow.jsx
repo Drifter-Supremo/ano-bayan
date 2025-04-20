@@ -32,12 +32,37 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   const slideshowRef = useRef(null);
   const controlsTimeout = useRef(null);
 
-  // Initialize list
+  // Store original images separately
+  const originalImages = useRef(images);
+
+  // Initialize list based on autoplay state (shuffle if starting in autoplay)
   useEffect(() => {
-    setList(images);
+    setList(autoPlay ? shuffle(originalImages.current) : originalImages.current);
     setIndex(initialIndex);
-    setAutoPlay(false);
-  }, [images, initialIndex]);
+    // Don't reset autoplay here, let the button control it
+  }, [images, initialIndex]); // Rerun if original images change
+
+  // Effect to shuffle/unshuffle when autoplay toggles
+  useEffect(() => {
+    if (autoPlay) {
+      // Shuffle when starting autoplay
+      const shuffledList = shuffle(originalImages.current);
+      setList(shuffledList);
+      // Find the current image in the shuffled list to maintain position if possible, else start at 0
+      const currentImage = list[index];
+      const newIndex = shuffledList.findIndex(img => img === currentImage);
+      setIndex(newIndex !== -1 ? newIndex : 0);
+    } else {
+      // Revert to original order when stopping autoplay
+      const currentImage = list[index]; // Get current image from potentially shuffled list
+      setList(originalImages.current);
+      // Find the index of the current image in the original list
+      const originalIndex = originalImages.current.findIndex(img => img === currentImage);
+      setIndex(originalIndex !== -1 ? originalIndex : 0); // Go back to its original position
+    }
+    // Intentionally omitting list and index from dependencies to avoid loops
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPlay, originalImages]);
 
   // Adjust duration based on orientation
   const onLoad = e => {
