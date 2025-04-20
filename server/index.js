@@ -8,8 +8,17 @@ const path = require('path');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('../client/dist'));
-app.use('/slideshow-dataset', express.static(path.join(__dirname, '../client/public/slideshow-dataset')));
+
+// Serve static files from the React build directory
+// Make sure this path is correct relative to where server/index.js is run from
+const clientDistPath = path.join(__dirname, '../client/dist');
+app.use(express.static(clientDistPath));
+
+// Serve the dataset images (if they are still needed and not handled by Firebase)
+// const datasetPath = path.join(__dirname, '../client/public/slideshow-dataset');
+// app.use('/slideshow-dataset', express.static(datasetPath));
+
+// API routes should come BEFORE the catch-all
 
 // Config for playlist thumbnails
 const playlistThumbs = {
@@ -51,6 +60,12 @@ app.get('/api/playlists/:playlistName', (req, res) => {
       images: images.map(img => `/slideshow-dataset/${playlist}/${img}`),
     });
   });
+});
+
+// Catch-all route: If no API route or static file matched, send index.html.
+// This MUST be the last route defined.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
 app.listen(PORT, () => {

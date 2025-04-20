@@ -1,8 +1,11 @@
 {
   "name": "ano-bayan",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Slideshow viewer",
+  "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,6 +18,5 @@
   "bugs": {
     "url": "https://github.com/Drifter-Supremo/ano-bayan/issues"
   },
-  "homepage": "https://github.com/Drifter-Supremo/ano-bayan#readme",
-  "description": ""
+  "homepage": "https://github.com/Drifter-Supremo/ano-bayan#readme"
 }

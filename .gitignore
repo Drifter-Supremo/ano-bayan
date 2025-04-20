@@ -8,7 +8,3 @@
 .env
 # OS-specific files
 .DS_Store
-# Ignore image files
-*.jpg
-*.jpeg
-*.gif
