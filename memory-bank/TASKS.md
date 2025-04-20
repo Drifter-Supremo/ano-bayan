@@ -30,7 +30,7 @@ A private, password-protected, fully animated slideshow web app for curated imag
 \#\#\# 2.1 Slideshow Component  
 \- \[ \] Load images from API (do not hardcode paths)  
 \- \[ \] Display one image at a time with animation  
-\- \[ \] Add manual nav: next / prev buttons  
+\- [x] Add manual nav: next / prev buttons
 \- \[ \] Add auto-play mode with adjustable timing  
 \- \[ \] Add shuffle mode
 
@@ -137,4 +137,3 @@ A private, password-protected, fully animated slideshow web app for curated imag
 \*\*Lead Developer:\*\* Roo Code (supervised by MVP)    
 \*\*Start Date:\*\* \[fill in\]    
 \*\*Target Completion:\*\* \[fill in\]
-

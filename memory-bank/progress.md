@@ -41,11 +41,8 @@
 
 ## **Broken & Missing Features / What Needs to be Fixed ASAP**
 
-1. **Slideshow/Playlist Navigation BROKEN:**
-   - Left/right arrow key and button navigation between images in a playlist (slideshow functionality) is missing.
-   - Modal for image preview does not support cycling through images with arrows/keyboard.
-   - Previous slideshow logic exists in `Slideshow.jsx` but is not wired up to real playlist images.
-   - **Slideshow.jsx contains full slideshow logic:** left/right arrow navigation, keyboard support, swipe gestures, progress indicators, etc. **BUT:** It uses a hardcoded `imageList` and `basePath`, not the Firebase playlist images. It is not currently integrated with playlist images loaded from Firebase.
+1. **Slideshow/Playlist Navigation: Fixed**
+   - Navigation between images via arrow keys, buttons, keyboard events, and swipe gestures now fully functional and integrated with Firebase-loaded images.
 
 2. **User Experience Issues:**
    - After login, redirect to home page was missing (now fixed).
@@ -78,9 +75,7 @@
 
 ## **What Needs to be Done**
 
-- [x] **Restore slideshow/playlist navigation:**
-      - Add left/right navigation (arrows and keyboard) to the image modal in PlaylistGridView.
-      - Integrate or refactor slideshow logic so it works with Firebase-loaded images.
+- [x] **Slideshow/playlist navigation is fixed.**
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
