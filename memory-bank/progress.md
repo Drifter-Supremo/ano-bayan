@@ -34,6 +34,7 @@
 - **Home Page:** Loads and displays playlists from Firebase Storage with thumbnails.
 - **Playlist Page:** Loads and displays all images in a playlist from Firebase Storage.
 - **Logout:** Works and reloads to login screen.
+- **Playlist Drawer:** Slide-out folder selector with shuffle and logout implemented.
 
 ---
 

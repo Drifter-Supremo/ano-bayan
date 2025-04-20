@@ -42,8 +42,10 @@
 *Note: Auth now integrated with Supabase. Environment variable loading was fixed by placing .env in the client directory.*
 
 ### **Phase 2.5: Polish & Animations**
-- [ ] Framer Motion for image and UI transitions
-- [ ] Subtle fade/slide/scale between images
+- [ ] Slideshow transitions with Framer Motion (fade, scale, slide)
+- [ ] Drawer open/close and backdrop animations
+- [ ] Playlist thumbnail hover and grid animations
+- [ ] Loading skeletons and progress indicators
 - [ ] Responsive tweaks and finishing touches
 
 ---
