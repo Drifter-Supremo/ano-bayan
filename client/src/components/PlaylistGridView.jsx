@@ -4,22 +4,35 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
 const storage = getStorage(app);
 
-function ImageModal({ images, initialImageIndex, onClose }) {
+function ImageModal({ images, initialImageIndex, shuffleEnabled, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(initialImageIndex);
+  const [displayImages, setDisplayImages] = useState([]);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
+  // Update displayImages and reset index when images or shuffle mode change
   useEffect(() => {
+    if (images.length === 0) return;
+    if (shuffleEnabled) {
+      const shuffled = [...images];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      setDisplayImages(shuffled);
+    } else {
+      setDisplayImages(images);
+    }
     setCurrentIndex(initialImageIndex);
-  }, [initialImageIndex]);
+  }, [images, shuffleEnabled, initialImageIndex]);
 
   const prevImage = useCallback(() => {
-    setCurrentIndex(i => (i - 1 + images.length) % images.length);
-  }, [images]);
+    setCurrentIndex(i => (i - 1 + displayImages.length) % displayImages.length);
+  }, [displayImages]);
 
   const nextImage = useCallback(() => {
-    setCurrentIndex(i => (i + 1) % images.length);
-  }, [images]);
+    setCurrentIndex(i => (i + 1) % displayImages.length);
+  }, [displayImages]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -45,9 +58,9 @@ function ImageModal({ images, initialImageIndex, onClose }) {
     }
   };
 
-  if (initialImageIndex === null || images.length === 0) return null;
+  if (initialImageIndex === null || displayImages.length === 0) return null;
 
-  const currentImageUrl = images[currentIndex];
+  const currentImageUrl = displayImages[currentIndex];
 
   return (
     <div
@@ -91,7 +104,7 @@ function ImageModal({ images, initialImageIndex, onClose }) {
 }
 
 
-export default function PlaylistGridView() {
+export default function PlaylistGridView({ shuffleEnabled }) {
   const { playlistName } = useParams();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -146,7 +159,12 @@ export default function PlaylistGridView() {
           </div>
         )}
       </div>
-      <ImageModal images={images} initialImageIndex={modalImageIndex} onClose={() => setModalImageIndex(null)} />
+      <ImageModal
+        images={images}
+        initialImageIndex={modalImageIndex}
+        shuffleEnabled={shuffleEnabled}
+        onClose={() => setModalImageIndex(null)}
+      />
     </div>
   );
 }

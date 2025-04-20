@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
-import LogoutButton from "./LogoutButton";
 const storage = getStorage(app);
 
 export default function Home() {
@@ -48,7 +47,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#032934] flex flex-col items-center justify-center relative">
-      <LogoutButton />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 py-12">
         {playlists.map((playlist) => (
           <div
