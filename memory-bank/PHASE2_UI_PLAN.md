@@ -33,8 +33,11 @@
 - [ ] Responsive drawer for mobile
 
 ### **Phase 2.4: Settings & Auth UI**
+- [x] Minimal login page and authentication guard (Supabase Google Auth)
 - [ ] Minimal menu (top-right) for login/logout, preferences
 - [ ] Only visible if logged in
+
+*Note: Auth now integrated with Supabase. Environment variable loading was fixed by placing .env in the client directory.*
 
 ### **Phase 2.5: Polish & Animations**
 - [ ] Framer Motion for image and UI transitions
