@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
@@ -9,6 +10,11 @@ function ImageModal({ images, initialImageIndex, shuffleEnabled, onClose }) {
   const [displayImages, setDisplayImages] = useState([]);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
+  const variants = {
+    enter: { opacity: 0 },
+    center: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
 
   // Update displayImages and reset index when images or shuffle mode change
   useEffect(() => {
@@ -69,13 +75,21 @@ function ImageModal({ images, initialImageIndex, shuffleEnabled, onClose }) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <img
-        src={currentImageUrl}
-        alt={`Slideshow image ${currentIndex + 1}`}
-        className="max-h-[90vh] max-w-[98vw] object-contain rounded shadow-lg transition-all duration-300"
-        onClick={e => e.stopPropagation()}
-        draggable={false}
-      />
+      <AnimatePresence initial={false} mode="wait">
+<motion.img
+  key={currentImageUrl}
+  src={currentImageUrl}
+  alt={`Slideshow image ${currentIndex + 1}`}
+  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[90vh] max-w-[98vw] object-contain rounded shadow-lg"
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          onClick={e => e.stopPropagation()}
+          draggable={false}
+        />
+      </AnimatePresence>
 
       {/* Navigation arrows */}
       <button
