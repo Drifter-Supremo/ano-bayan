@@ -1,19 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"; // Removed useState
 import { signInWithGoogle, auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth"; // Removed getRedirectResult
 
 export default function LoginScreen() {
   const navigate = useNavigate();
 
+  // Listener: Handles cases where user is already logged in when visiting /login
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
+        // If user is found (already logged in or just logged in via popup), navigate home
         navigate("/", { replace: true });
       }
+      // No need to log if user is null
     });
     return () => unsub();
-  }, [navigate]);
+  }, [navigate]); // Only navigate dependency needed
+
+  // Removed the useEffect hook that called getRedirectResult
+  // Removed the loadingRedirect state and the loading indicator conditional return
+
+  // Removed handleSignIn wrapper as it only contained a log
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#032934]">
@@ -24,7 +32,7 @@ export default function LoginScreen() {
         draggable={false}
       />
       <button
-        onClick={signInWithGoogle}
+        onClick={signInWithGoogle} // Call directly
         className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
       >
         <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 48 48">

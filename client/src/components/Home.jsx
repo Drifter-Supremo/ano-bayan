@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { app } from "../firebase";
+import { app, auth } from "../firebase";
 const storage = getStorage(app);
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
       setError(null);
       try {
         // List all folders (playlists) in the bucket using Firebase
-        const rootRef = ref(storage, 'ano-bayan-images');
+        const rootRef = ref(storage); // Reference the root of the bucket
         const folderRes = await listAll(rootRef);
         const folders = folderRes.prefixes; // Array of folder references
         // For each folder, get the first image as thumbnail
@@ -37,7 +37,14 @@ export default function Home() {
         setLoading(false);
       }
     }
-    fetchPlaylists();
+    // Only fetch playlists if a user is currently logged in when the component mounts
+    if (auth.currentUser) {
+      fetchPlaylists();
+    } else {
+      // Handle case where user is not logged in on mount (optional: show message or redirect)
+      setLoading(false); // Stop loading indicator
+      // setError("Please log in to view playlists."); // Example message
+    }
   }, []);
 
   const navigate = useNavigate();

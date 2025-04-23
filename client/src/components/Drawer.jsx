@@ -13,7 +13,7 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
   useEffect(() => {
     async function fetchPlaylists() {
       try {
-        const rootRef = ref(storage, "ano-bayan-images");
+        const rootRef = ref(storage); // List folders from the root
         const folderRes = await listAll(rootRef);
         const names = folderRes.prefixes.map(pref => pref.name);
         setPlaylists(names);

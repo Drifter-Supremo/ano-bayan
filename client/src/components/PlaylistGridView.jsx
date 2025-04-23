@@ -19,7 +19,7 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
     async function fetchImages() {
       setLoading(true);
       try {
-        const folderRef = ref(storage, `ano-bayan-images/${playlistName}`);
+        const folderRef = ref(storage, playlistName); // Access playlist folder directly from root
         const res = await listAll(folderRef);
         const urls = await Promise.all(res.items.map(i => getDownloadURL(i)));
         setImages(urls); // Removed shuffle logic here
