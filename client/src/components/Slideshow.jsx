@@ -139,12 +139,22 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
     };
   }, [prev, next, onClose, handleInteraction]); // Added handleInteraction dependency
 
-  // Touch nav
-  const handleTouchStart = e => { touchStart.current = e.changedTouches[0].clientX; handleInteraction(); };
+  // Touch nav: only allow swipe if single-finger (native pinch-to-zoom will work)
+  const handleTouchStart = e => {
+    if (e.touches.length === 1) {
+      touchStart.current = e.touches[0].clientX;
+    } else {
+      touchStart.current = null;
+    }
+    handleInteraction();
+  };
   const handleTouchEnd = e => {
+    // Only trigger swipe if single touch throughout
+    if (touchStart.current == null || e.changedTouches.length !== 1) return;
     const dx = e.changedTouches[0].clientX - touchStart.current;
     if (Math.abs(dx) > 50) dx > 0 ? prev() : next();
   };
+
 
   // Transitions: fade+zoom if autoplaying, simple fade otherwise
   const variants = autoPlay
