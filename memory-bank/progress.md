@@ -85,3 +85,80 @@
 ---
 
 **This log is up to date as of the end of this session.**
+
+## Session Date: 2025-04-23
+
+---
+
+## **Summary of Work Completed in This Session**
+
+### 1. **Migration to New Firebase Project**
+- Cloned existing project to a new machine.
+- Created a new Firebase project for the application.
+- Updated client-side `.env` with new Firebase project credentials.
+
+### 2. **Troubleshooting and Debugging**
+- **Issue:** Initial `storage/unauthorized` errors when accessing storage.
+  - **Diagnosis:** Incorrect Firebase Storage security rules in the new project.
+  - **Resolution:** Updated Storage rules to allow authenticated users to read from the `ano-bayan-images` path.
+- **Issue:** `Cross-Origin-Opener-Policy` errors and `runtime.lastError` during Google Sign-in with `signInWithRedirect`.
+  - **Diagnosis:** Potential incompatibility or environment-specific issues with `signInWithRedirect` on `localhost`.
+  - **Resolution:** Switched Google Sign-in method back to `signInWithPopup`.
+- **Issue:** Not navigated to home page after successful `signInWithRedirect`.
+  - **Diagnosis:** Timing issue with authentication state handling after redirect.
+  - **Resolution:** Attempted to fix authentication state handling in `ProtectedRoute.jsx` and `LoginScreen.jsx`. (Note: This fix was later reverted).
+- **Issue:** Persistent `storage/unauthorized` errors referencing old storage path (`ano-bayan-images`).
+  - **Diagnosis:** Application code still referencing the old storage path.
+  - **Resolution:** Updated storage reference paths in `client/src/components/Home.jsx`, `client/src/components/Drawer.jsx`, and `client/src/components/PlaylistGridView.jsx` to list from the root of the bucket.
+- **Issue:** Build errors ("symbol already declared") after debugging code removal.
+  - **Diagnosis:** Duplicate import statements in `client/src/components/LoginScreen.jsx`.
+  - **Resolution:** Removed duplicate import statements.
+- **Issue:** Playlists not listing after recent code changes, despite correct storage rules and authentication.
+  - **Diagnosis:** User identified that playlist listing was working before a specific code change and reverted it themselves. The root cause of the temporary failure after the revert was not fully diagnosed during the session.
+  - **Resolution:** User resolved the playlist listing issue independently after reverting a code change.
+
+### 3. **Deployment Preparation**
+- Provided formatted Firebase environment variables for Railway deployment.
+- Added `client/.env` to `.gitignore`.
+
+---
+
+## **Current State of the App (as of end of session)**
+
+- **Authentication:** Works with Firebase Google sign-in (`signInWithPopup`).
+- **Storage Access:** Authenticated user with specific UID has `read`, `write`, and `list` permissions for all paths in Storage. Playlists are listing correctly (user confirmed).
+- **Build:** Application builds successfully.
+- **Deployment:** Environment variables formatted for Railway. `client/.env` ignored by Git.
+
+---
+
+## **Exactly How Firebase is Used in This App (Updated)**
+
+- **Authentication:**
+  - Uses Firebase Auth (GoogleAuthProvider) for login/logout.
+  - `signInWithGoogle` triggers a Google sign-in popup.
+  - `signOutGoogle` logs out the user.
+  - `onAuthStateChanged` is used to track login state and protect routes.
+  - Uses `signInWithPopup` for Google Sign-in.
+
+- **Storage:**
+  - Uses Firebase Storage to list folders and fetch image URLs.
+  - Accesses folders and files directly from the root of the storage bucket.
+  - Storage rules restrict `read`, `write`, and `list` permissions to a specific authenticated UID.
+
+- **Environment:**
+  - All Firebase config values are loaded from `.env` (client-side) and should be configured as environment variables in the deployment environment (Railway).
+
+---
+
+## **What Needs to be Done (Updated)**
+
+- [ ] **Add error handling and user feedback for login/image loading failures.**
+- [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
+- [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
+- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
+- [ ] **Verify deployed application functions correctly with the new Firebase project.**
+
+---
+
+**This log is up to date as of the end of this session.**

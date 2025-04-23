@@ -12,17 +12,19 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
 
   useEffect(() => {
     async function fetchPlaylists() {
+      if (!auth.currentUser) return;
       try {
-        const rootRef = ref(storage); // List folders from the root
+        const rootRef = ref(storage);
         const folderRes = await listAll(rootRef);
-        const names = folderRes.prefixes.map(pref => pref.name);
-        setPlaylists(names);
+        setPlaylists(folderRes.prefixes.map(pref => pref.name));
       } catch (err) {
         console.error("Failed to fetch playlists for drawer:", err);
       }
     }
-    fetchPlaylists();
-  }, [storage]);
+    if (open) {
+      fetchPlaylists();
+    }
+  }, [open, storage]);
 
   if (!open) return null;
 
