@@ -11,8 +11,14 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
   const location = useLocation();
 
   useEffect(() => {
+    if (!open) return;
+    const user = auth.currentUser;
+    if (!user || user.uid !== "QhXpKWU6d8anCHpbtdfqx3FVDSZ2") {
+      onClose();
+      navigate("/login");
+      return;
+    }
     async function fetchPlaylists() {
-      if (!auth.currentUser) return;
       try {
         const rootRef = ref(storage);
         const folderRes = await listAll(rootRef);
@@ -21,10 +27,8 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
         console.error("Failed to fetch playlists for drawer:", err);
       }
     }
-    if (open) {
-      fetchPlaylists();
-    }
-  }, [open, storage]);
+    fetchPlaylists();
+  }, [open]);
 
   if (!open) return null;
 

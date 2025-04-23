@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth"; // Removed getRedirectResult import
+import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth"; 
 
 export default function ProtectedRoute({ children }) {
   const [authLoading, setAuthLoading] = useState(true);
@@ -17,14 +17,14 @@ export default function ProtectedRoute({ children }) {
     return () => unsubscribe();
   }, []); // Run only once on mount
 
-  // Effect 2: Decide navigation
+  // Effect 2: Redirect unauthorized users
   useEffect(() => {
-    // Wait until initial auth state check is finished
     if (!authLoading) {
-      if (!user) {
+      // Only allow specific user
+      if (!user || user.uid !== "QhXpKWU6d8anCHpbtdfqx3FVDSZ2") {
+        if (user) firebaseSignOut(auth);
         navigate("/login", { replace: true });
       }
-      // If user exists, do nothing, allow rendering children
     }
   }, [user, authLoading, navigate]);
 
