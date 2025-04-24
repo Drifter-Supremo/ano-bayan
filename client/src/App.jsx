@@ -26,7 +26,7 @@ function App() {
       />
       <AppContent
         isDrawerOpen={isDrawerOpen}
-        openDrawer={() => setIsDrawerOpen(true)}
+        setIsDrawerOpen={setIsDrawerOpen}
         // Removed shuffle prop
       />
       {/* Keep LocationLogger if desired, or remove it too */}
@@ -60,7 +60,7 @@ function LocationLogger() {
 }
 
 
-function AppContent({ openDrawer }) {
+function AppContent({ isDrawerOpen, setIsDrawerOpen }) {
   const location = useLocation();
   // Removed console logs
   // hide hamburger on login page
@@ -70,7 +70,7 @@ function AppContent({ openDrawer }) {
   return (
     <button
       className="fixed top-4 left-4 z-50 text-white text-lg p-2 bg-black/40 rounded"
-      onClick={openDrawer}
+      onClick={() => setIsDrawerOpen(!isDrawerOpen)}
       aria-label="Open menu"
     >
       &#9776;
