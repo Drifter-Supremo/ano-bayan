@@ -25,12 +25,7 @@ export default function LoginScreen() {
   // Removed handleSignIn wrapper as it only contained a log
 
   return (
-    <motion.div
-      className="min-h-screen w-full flex flex-col items-center justify-center bg-[#032934]"
-      initial={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#032934]">
       <img
         src="/ano-bayan-landing-page-image.png"
         alt="Ano Bayan Landing"
@@ -50,6 +45,6 @@ export default function LoginScreen() {
         </svg>
         Sign in with Google
       </button>
-    </motion.div>
+    </div>
   );
 }
