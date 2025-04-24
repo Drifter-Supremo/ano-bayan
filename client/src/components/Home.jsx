@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { motion } from "framer-motion";
 import { app, auth } from "../firebase";
 const storage = getStorage(app);
 
@@ -53,12 +54,27 @@ export default function Home() {
   if (error) return <div className="text-center py-10 text-red-400">{error}</div>;
 
   return (
-    <div className="min-h-screen bg-[#032934] flex flex-col items-center justify-center relative">
+    <motion.div
+      className="min-h-screen bg-[#032934] flex flex-col items-center justify-center relative"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 py-12">
         {playlists.map((playlist) => (
-          <div
+          <motion.div
             key={playlist.name}
-            className="group rounded-2xl overflow-hidden shadow-xl bg-neutral-900/70 hover:scale-105 hover:shadow-2xl transition-transform duration-200 cursor-pointer aspect-square"
+            className="group rounded-2xl overflow-hidden shadow-xl bg-neutral-900/70 cursor-pointer aspect-square" // Removed hover styles handled by motion
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut"
+            }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)"
+            }}
             onClick={() => navigate(`/playlist/${encodeURIComponent(playlist.name)}`)}
           >
             {playlist.thumbnail && (
@@ -69,9 +85,9 @@ export default function Home() {
                 draggable={false}
               />
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

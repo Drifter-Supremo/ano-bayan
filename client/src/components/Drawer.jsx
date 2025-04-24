@@ -3,6 +3,7 @@ import { getStorage, ref, listAll } from "firebase/storage";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle }) {
   const [playlists, setPlaylists] = useState([]);
@@ -38,16 +39,32 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
     };
   }, [open]);
 
-  if (!open) return null;
-
+  // Use AnimatePresence to handle the exit animation
   return (
-    <div className="fixed inset-0 z-40 flex">
-      <div className="fixed inset-0 bg-black/50" onClick={onClose}></div>
-      <div className="relative bg-[#032934] w-64 h-full p-4 text-white flex flex-col overflow-hidden">
-        {/* Drawer closes on backdrop click; removed close button */}
-        <ul className="mt-8 space-y-3 flex-grow overflow-y-auto h-0 overscroll-contain">
-          <li
-            className={`cursor-pointer ${location.pathname === "/" ? "font-bold" : ""}`}
+    <AnimatePresence>
+      {open && ( // Only render when open is true
+        <div className="fixed inset-0 z-40 flex">
+          {/* Backdrop with fade */}
+          <motion.div
+            className="fixed inset-0 bg-black/50"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          />
+          {/* Drawer Panel with slide */}
+          <motion.div
+            className="relative bg-[#032934] w-64 h-full p-4 text-white flex flex-col overflow-hidden"
+            initial={{ x: "-100%", opacity: 0 }} // Start fully off-screen left
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "-100%", opacity: 0 }} // Exit back to the left
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            {/* Drawer closes on backdrop click; removed close button */}
+            <ul className="mt-8 space-y-3 flex-grow overflow-y-auto h-0 overscroll-contain">
+              <li
+                className={`cursor-pointer ${location.pathname === "/" ? "font-bold" : ""}`}
             onClick={() => { navigate("/"); onClose(); }}
           >
             Home
@@ -71,7 +88,9 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
             Logout
           </button>
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }

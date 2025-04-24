@@ -3,8 +3,31 @@ import { useParams, useLocation } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
 import Slideshow from "./Slideshow";
+import { motion } from "framer-motion";
 
 const storage = getStorage(app);
+
+// Container animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1
+    }
+  }
+};
+
+// Child animation variants
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
 
 export default function PlaylistGridView() { // Removed shuffleEnabled prop
   const { playlistName } = useParams();
@@ -43,7 +66,22 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
   }, [showSlideshow]);
 
   if (loading) {
-    return <div className="text-center py-10 text-white/70">Loading images...</div>;
+    return (
+      <motion.div
+        className="text-center py-10 text-xl text-white/70"
+        animate={{
+          opacity: [0.7, 0.9, 0.7],
+          scale: [1, 1.02, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 1.5,
+          ease: "easeInOut"
+        }}
+      >
+        Loading images...
+      </motion.div>
+    );
   }
   if (error) {
     return <div className="text-center py-10 text-red-400">{error}</div>;
@@ -61,11 +99,17 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
 
   return (
     <div className="min-h-screen bg-[#032934] p-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <motion.div
+        className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
         {images.map((url, idx) => (
-          <div
+          <motion.div
             key={url}
             className="cursor-pointer rounded shadow-lg overflow-hidden"
+            variants={itemVariants} // Apply item variants
             onClick={() => {
               // Save scroll position before showing slideshow
               scrollPos.current = window.pageYOffset || document.documentElement.scrollTop;
@@ -79,9 +123,9 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
               className="w-full aspect-[3/4] object-cover hover:scale-105 transition"
               draggable={false}
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"; // Keep useEffect for LocationLogger
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 // Removed auth and getRedirectResult imports as they are no longer needed here
+import { AnimatePresence } from "framer-motion"; // Import AnimatePresence
+import { motion } from "framer-motion"; // Import motion
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PlaylistGridView from "./components/PlaylistGridView";
@@ -31,21 +33,7 @@ function App() {
       />
       {/* Keep LocationLogger if desired, or remove it too */}
       <LocationLogger />
-      <Routes>
-        <Route path="/login" element={<LoginScreen />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/playlist/:playlistName"
-          element={<PlaylistGridView />} // Removed shuffle prop
-        />
-      </Routes>
+      <AnimatedRoutes /> {/* Use the new AnimatedRoutes component */}
     </Router>
   );
 }
@@ -58,6 +46,40 @@ function LocationLogger() {
   }, [location]);
   return null; // This component doesn't render anything
 }
+// Shared page transition component
+const PageTransition = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }}
+  >
+    {children}
+  </motion.div>
+);
+// New component to handle animated route transitions
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/login" element={<PageTransition><LoginScreen /></PageTransition>} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <PageTransition><Home /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/playlist/:playlistName"
+          element={<PageTransition><PlaylistGridView /></PageTransition>} // Removed shuffle prop
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 
 function AppContent({ isDrawerOpen, setIsDrawerOpen }) {
@@ -68,13 +90,15 @@ function AppContent({ isDrawerOpen, setIsDrawerOpen }) {
     return null;
   }
   return (
-    <button
+    <motion.button
       className="fixed top-4 left-4 z-50 text-white text-lg p-2 bg-black/40 rounded"
       onClick={() => setIsDrawerOpen(!isDrawerOpen)}
       aria-label="Open menu"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
     >
       &#9776;
-    </button>
+    </motion.button>
   );
 }
 
