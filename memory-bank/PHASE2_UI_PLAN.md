@@ -33,7 +33,7 @@
 
 ### **Phase 2.3: Playlist/Folder Drawer**
 - [x] Slide-out drawer/modal for folder/playlist selection (desktop only)
-- [x] Only visible on click (hamburger toggle, backdrop click to close)
+- [x] Toggle visibility on hamburger click; closes on backdrop click or Escape key
 - [ ] Responsive drawer for mobile
 - [x] Shuffle option: toggle to randomize image order in the slideshow modal
 

@@ -1,0 +1,33 @@
+# Ano Bayan Project Intelligence
+
+## UI Patterns
+1. **Drawer Scrolling Implementation**:
+   - Requires both CSS and JavaScript solutions:
+     * CSS: `flex flex-col` on container, `flex-grow overflow-y-auto h-0` on scrollable element
+     * JavaScript: `document.body.style.overflow = 'hidden'` when drawer opens
+   - Mobile considerations: `overscroll-contain` prevents background scrolling
+
+2. **Component State Management**:
+   - For toggle components, pass both state and setter (e.g., `isDrawerOpen` and `setIsDrawerOpen`)
+   - State should be managed at the highest common parent level
+
+## Firebase Integration
+1. **Authentication**:
+   - Uses `signInWithPopup` for Google Sign-in
+   - Auth state is tracked via `onAuthStateChanged`
+
+2. **Storage**:
+   - Rules restrict access to specific UID
+   - Always reference from root of storage bucket
+   - Environment variables must be properly configured in `.env`
+
+## Development Patterns
+1. **Error Handling**:
+   - Common issues include:
+     * `storage/unauthorized` errors from incorrect rules
+     * `Cross-Origin-Opener-Policy` issues with auth popups
+   - Always verify Firebase project configuration matches local `.env`
+
+2. **Deployment**:
+   - Requires proper Railway environment variable setup
+   - `client/.env` should be gitignored
