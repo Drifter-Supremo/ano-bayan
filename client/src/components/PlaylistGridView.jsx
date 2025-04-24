@@ -29,7 +29,7 @@ const itemVariants = {
   }
 };
 
-export default function PlaylistGridView() { // Removed shuffleEnabled prop
+export default function PlaylistGridView() { // Removed prop
   const { playlistName } = useParams();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,9 +37,30 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
   const [showSlideshow, setShowSlideshow] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
   const scrollPos = useRef(0); // Store scroll position locally
+  // Determine initial animation state from localStorage
+  const storageKey = `animated_${playlistName}`;
+  const hasAnimatedInitially = localStorage.getItem(storageKey) === 'true';
+
+  // Log component mount and unmount
+  useEffect(() => {
+    console.log(`[PlaylistGridView MOUNT] Playlist: ${playlistName}, Has animated (localStorage): ${hasAnimatedInitially}`);
+    return () => {
+      console.log(`[PlaylistGridView UNMOUNT] Playlist: ${playlistName}`);
+    };
+  }, [playlistName, hasAnimatedInitially]); // Add dependencies for logging consistency
+
+  // Effect to set localStorage flag immediately on first mount if needed
+  useEffect(() => {
+    if (!hasAnimatedInitially) {
+      console.log(`[PlaylistGridView MOUNT EFFECT] Setting localStorage key '${storageKey}' to true immediately.`);
+      localStorage.setItem(storageKey, 'true');
+    }
+  }, []); // Runs only once on mount
 
   useEffect(() => {
+    console.log(`[PlaylistGridView EFFECT START] Playlist: ${playlistName}, Has animated (localStorage): ${hasAnimatedInitially}`);
     async function fetchImages() {
+      // Fetching logic remains the same
       setLoading(true);
       try {
         const folderRef = ref(storage, playlistName); // Access playlist folder directly from root
@@ -54,8 +75,9 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
     fetchImages();
   }, [playlistName]); // Removed shuffleEnabled dependency
 
-  // Restore scroll position when slideshow closes
+  // Restore scroll position and log slideshow state changes
   useEffect(() => {
+    console.log(`[PlaylistGridView EFFECT Slideshow] showSlideshow: ${showSlideshow}, Has animated (localStorage): ${hasAnimatedInitially}`);
     if (!showSlideshow) {
       // Need a slight delay for the browser to re-render the grid
       // before attempting to scroll.
@@ -102,8 +124,10 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
       <motion.div
         className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
         variants={containerVariants}
-        initial="hidden"
+        // Use the value read from localStorage
+        initial={hasAnimatedInitially ? false : "hidden"}
         animate="show"
+        // Removed onAnimationComplete handler
       >
         {images.map((url, idx) => (
           <motion.div
@@ -111,6 +135,7 @@ export default function PlaylistGridView() { // Removed shuffleEnabled prop
             className="cursor-pointer rounded shadow-lg overflow-hidden"
             variants={itemVariants} // Apply item variants
             onClick={() => {
+              console.log(`[PlaylistGridView CLICK] Opening slideshow for ${playlistName}. Index: ${idx}, Has animated (localStorage): ${localStorage.getItem(storageKey) === 'true'}`);
               // Save scroll position before showing slideshow
               scrollPos.current = window.pageYOffset || document.documentElement.scrollTop;
               setStartIndex(idx);

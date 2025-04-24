@@ -60,6 +60,7 @@ const PageTransition = ({ children }) => (
 // New component to handle animated route transitions
 function AnimatedRoutes() {
   const location = useLocation();
+  // Removed playlistAnimationStatus ref
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -74,7 +75,11 @@ function AnimatedRoutes() {
         />
         <Route
           path="/playlist/:playlistName"
-          element={<PageTransition><PlaylistGridView /></PageTransition>} // Removed shuffle prop
+          element={
+            <PageTransition>
+              <PlaylistGridView />
+            </PageTransition>
+          } // Removed prop
         />
       </Routes>
     </AnimatePresence>
