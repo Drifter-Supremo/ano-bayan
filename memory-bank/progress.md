@@ -126,7 +126,7 @@
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
-- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
+- [x] **Deploy updated application to Railway with new Firebase environment variables.**
 - [ ] **Verify deployed application functions correctly with the new Firebase project.**
 
 ---
@@ -177,7 +177,7 @@
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
-- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
+- [x] **Deploy updated application to Railway with new Firebase environment variables.**
 - [ ] **Verify deployed application functions correctly with the new Firebase project.**
 
 ---
@@ -311,12 +311,12 @@
 
 ## **What Needs to be Done (Updated)**
 
-- [ ] **Test the updated grid on various devices for responsiveness and visual consistency.**
+- [x] **Test the updated grid on various devices for responsiveness and visual consistency.**
 - [ ] **Add error handling and user feedback for login/image loading failures.**
 - [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
 - [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
-- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
-- [ ] **Verify deployed application functions correctly with the new Firebase project.**
+- [x] **Deploy updated application to Railway with new Firebase environment variables.**
+- [x] **Verify deployed application functions correctly with the new Firebase project.**
 
 ---
 

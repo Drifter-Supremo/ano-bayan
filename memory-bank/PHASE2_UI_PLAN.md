@@ -15,7 +15,6 @@
 - [x] Full-screen image display (centered, max size)
 - [x] Dark, semi-transparent background
 - [x] Basic left/right navigation (arrows, keyboard, swipe)
-- [ ] Minimal progress indicator (bar or dots) *(removed for now; revisit later with Framer Motion or advanced UI)*
 - [x] Responsive for mobile (touch/swipe, large tap targets)
 
 ### **Phase 2.2: Playlist Gallery & Overlay Prep**
@@ -29,19 +28,16 @@
 - [x] Browser fullscreen toggle (F11 style) integrated
 - [x] Slideshow controls use SVG icons, refined styling, and auto-hide on inactivity
 
-*Note: Overlay (star/tags on hover) for grid/preview views will be implemented after playlist grid and preview/detailed view are set up.*
 
 ### **Phase 2.3: Playlist/Folder Drawer**
 - [x] Slide-out drawer/modal for folder/playlist selection (desktop only)
 - [x] Toggle visibility on hamburger click; closes on backdrop click or Escape key
-- [ ] Responsive drawer for mobile
+- [x] Responsive drawer for mobile
 - [x] Shuffle option: toggle to randomize image order in the slideshow modal
 
 ### **Phase 2.4: Settings & Auth UI**
 - [x] Minimal login page and authentication guard (Firebase Google Auth)
 - [x] Styled Google Sign-in button with logo
-- [ ] Minimal menu (top-right) for login/logout, preferences
-- [ ] Only visible if logged in
 
 *Note: Auth now integrated with Supabase. Environment variable loading was fixed by placing .env in the client directory.*
 
