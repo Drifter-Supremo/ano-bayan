@@ -272,3 +272,52 @@
 3. Verified login, homepage, and playlist transitions remain unaffected.
 
 ---
+
+## Session Date: 2025-04-25 – Playlist Grid Layout Update
+
+---
+
+## **Summary of Work Completed in This Session**
+
+### 1. **UI Layout Improvements**
+- Modified `client/src/components/PlaylistGridView.jsx` to enforce a 3-column grid layout across all screen sizes.
+- Updated the `className` on the main `motion.div` container to use `grid grid-cols-3 gap-4`, removing the responsive `sm:` and `md:` prefixes.
+- Ensured no other parts of the component were altered, maintaining existing functionality.
+
+---
+
+## **Current State of the App (as of end of session)**
+
+- **Authentication:** Works with Firebase Google sign-in (`signInWithPopup`).
+- **Storage Access:** Authenticated user with specific UID has `read`, `write`, and `list` permissions for all paths in Storage. Playlists are listing correctly.
+- **Build:** Application builds successfully.
+- **Deployment:** Environment variables formatted for Railway. `client/.env` ignored by Git.
+- **Playlist Drawer:** Slide-out folder selector and logout implemented. The playlist list is scrollable, and background scrolling is prevented when the drawer is open. The hamburger button toggles the drawer.
+- **UI/UX Smoothness:** Enhanced with Framer Motion animations.
+- **Playlist Grid:** Now displays 3 images per row on mobile and desktop, reducing scrolling needs for large playlists.
+
+---
+
+## **Broken & Missing Features / What Needs to be Fixed ASAP**
+
+1. **User Experience Issues:**
+   - No feedback if login fails or popup is blocked.
+
+2. **General:**
+   - No error handling or loading indicators for failed image loads in modal.
+   - No support for favorites/tags (planned features, not regressions).
+
+---
+
+## **What Needs to be Done (Updated)**
+
+- [ ] **Test the updated grid on various devices for responsiveness and visual consistency.**
+- [ ] **Add error handling and user feedback for login/image loading failures.**
+- [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
+- [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
+- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
+- [ ] **Verify deployed application functions correctly with the new Firebase project.**
+
+---
+
+**This log is up to date as of the end of this session.**

@@ -122,7 +122,7 @@ export default function PlaylistGridView() { // Removed prop
   return (
     <div className="min-h-screen bg-[#032934] p-4">
       <motion.div
-        className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        className="max-w-6xl mx-auto grid grid-cols-3 gap-4"
         variants={containerVariants}
         // Use the value read from localStorage
         initial={hasAnimatedInitially ? false : "hidden"}
