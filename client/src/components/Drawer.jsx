@@ -65,29 +65,29 @@ export default function Drawer({ open, onClose, shuffleEnabled, toggleShuffle })
             <ul className="mt-8 space-y-3 flex-grow overflow-y-auto h-0 overscroll-contain">
               <li
                 className={`cursor-pointer ${location.pathname === "/" ? "font-bold" : ""}`}
-            onClick={() => { navigate("/"); onClose(); }}
-          >
-            Home
-          </li>
-          {playlists.map(name => (
-            <li
-              key={name}
-              className={`cursor-pointer ${location.pathname.includes(name) ? "font-bold" : ""}`}
-              onClick={() => { navigate(`/playlist/${encodeURIComponent(name)}`); onClose(); }}
-            >
-              {name}
-            </li>
-          ))}
-        </ul>
-        {/* Shuffle toggle removed */}
-        <div className="mt-auto pt-4">
-          <button
-            className="w-full text-left text-sm py-1 hover:underline"
-            onClick={() => { signOut(auth); onClose(); navigate("/login"); }}
-          >
-            Logout
-          </button>
-        </div>
+                onClick={() => { navigate("/"); onClose(); }}
+              >
+                Home
+              </li>
+              {playlists.map(name => (
+                <li
+                  key={name}
+                  className={`cursor-pointer ${location.pathname.includes(name) ? "font-bold" : ""}`}
+                  onClick={() => { navigate(`/playlist/${encodeURIComponent(name)}`); onClose(); }}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+            {/* Shuffle toggle removed */}
+            <div className="mt-auto pt-4">
+              <button
+                className="w-full text-left text-sm py-1 hover:underline"
+                onClick={async () => { onClose(); await signOut(auth); navigate("/login", { replace: true }); }}
+              >
+                Logout
+              </button>
+            </div>
           </motion.div>
         </div>
       )}

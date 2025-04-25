@@ -260,3 +260,15 @@
 ---
 
 **This log is up to date as of the end of this session.**
+
+## Session Date: 2025-04-25 – Logout & Transition Fixes
+
+---
+
+## **Summary of Work Completed in This Session**
+
+1. Fixed blank login screen on logout by awaiting `signOut(auth)` before navigation in `Drawer.jsx`.
+2. Ensured global fade animation on logout by reordering route wrappers: `<PageTransition>` now wraps `<ProtectedRoute>` in `App.jsx`.
+3. Verified login, homepage, and playlist transitions remain unaffected.
+
+---

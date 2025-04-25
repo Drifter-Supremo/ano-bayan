@@ -68,18 +68,22 @@ function AnimatedRoutes() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
-              <PageTransition><Home /></PageTransition>
-            </ProtectedRoute>
+            <PageTransition>
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            </PageTransition>
           }
         />
         <Route
           path="/playlist/:playlistName"
           element={
             <PageTransition>
-              <PlaylistGridView />
+              <ProtectedRoute>
+                <PlaylistGridView />
+              </ProtectedRoute>
             </PageTransition>
-          } // Removed prop
+          } 
         />
       </Routes>
     </AnimatePresence>
