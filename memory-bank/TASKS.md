@@ -28,21 +28,21 @@ A private, password-protected, fully animated slideshow web app for curated imag
 \#\# 🎨 PHASE 2: FRONTEND UI
 
 \#\#\# 2.1 Slideshow Component  
-\- \[ \] Load images from API (do not hardcode paths)  
-\- \[ \] Display one image at a time with animation  
+\- \[ \] Load images from API (do not hardcode paths)
+\- \[x] Display one image at a time with animation
 \- [x] Add manual nav: next / prev buttons
-\- \[ \] Add auto-play mode with adjustable timing  
-\- \[ \] Add shuffle mode
+\- \[x] Add auto-play mode with adjustable timing
+\- \[x] Add shuffle mode
 
-\#\#\# 2.2 UI Features  
-\- \[ \] Fullscreen toggle  
-\- \[ \] Transition effects (fade, slide, zoom via Framer Motion or CSS)  
-\- \[ \] Responsive layout (desktop \+ mobile)  
+\#\#\# 2.2 UI Features
+\- \[x] Fullscreen toggle
+\- \[x] Transition effects (fade, slide, zoom via Framer Motion or CSS)
+\- \[x] Responsive layout (desktop \+ mobile)
 \- \[ \] Minimal UI toggle (hide controls)
 
-\#\#\# 2.3 Playlist/Folder Support  
-\- \[ \] Detect image subfolders (e.g. \`/cheerleader/\`, \`/office-sins/\`)  
-\- \[ \] Add dropdown or sidebar to select folder/playlist  
+\#\#\# 2.3 Playlist/Folder Support
+\- \[ \] Detect image subfolders (e.g. \`/cheerleader/\`, \`/office-sins/\`)
+\- \[x] Add dropdown or sidebar to select folder/playlist
 \- \[ \] Load only images from selected folder
 
 \#\#\# 2.4 Favorites \+ Tags  
@@ -55,10 +55,10 @@ A private, password-protected, fully animated slideshow web app for curated imag
 
 \#\# 🔐 PHASE 3: AUTHENTICATION \+ ACCESS CONTROL
 
-\#\#\# 3.1 Password Login  
-\- \[ \] Create login page  
-\- \[ \] Set up Express session or token-based auth  
-\- \[ \] Add bcrypt password check (hardcoded password is fine for MVP)  
+\#\#\# 3.1 Password Login
+\- \[x] Create login page
+\- \[ \] Set up Express session or token-based auth
+\- \[ \] Add bcrypt password check (hardcoded password is fine for MVP)
 \- \[ \] Store session securely (cookie or in-memory)
 
 \#\#\# 3.2 Route Protection  
@@ -117,8 +117,8 @@ A private, password-protected, fully animated slideshow web app for curated imag
 \- \[ \] Add image count / slide progress bar
 
 \#\#\# 6.3 Final Touches  
-\- \[ \] Add favicon, title, basic branding (Ano Bayan logo?)  
-\- \[ \] Responsive testing on mobile/tablet  
+\- \[ \] Add favicon, title, basic branding (Ano Bayan logo?)
+\- \[x] Responsive testing on mobile/tablet
 \- \[ \] Final pass for performance
 
 \---

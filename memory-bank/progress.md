@@ -106,6 +106,58 @@
 - **Build:** Application builds successfully.
 - **Deployment:** Environment variables formatted for Railway. `client/.env` ignored by Git.
 - **Playlist Drawer:** Slide-out folder selector and logout implemented. The playlist list is now scrollable, and background scrolling is prevented when the drawer is open. The hamburger button now toggles the drawer.
+- **UI/UX Smoothness:** Enhanced with Framer Motion animations for page transitions (Login -> Home, general routes), drawer slide-in/out, playlist grid item loading (staggered entrance), home page item appearance/hover, loading indicators, and hamburger menu interaction.
+
+---
+
+## **Broken & Missing Features / What Needs to be Fixed ASAP**
+
+1. **User Experience Issues:**
+   - No feedback if login fails or popup is blocked.
+
+2. **General:**
+   - No error handling or loading indicators for failed image loads in modal.
+   - No support for favorites/tags (planned features, not regressions).
+
+---
+
+## **What Needs to be Done (Updated)**
+
+- [ ] **Add error handling and user feedback for login/image loading failures.**
+- [ ] **Review all navigation and authentication flows for any other missing "common sense" behaviors.**
+- [ ] **(Optional) Refactor modal/slideshow logic for reuse and maintainability.**
+- [ ] **Deploy updated application to Railway with new Firebase environment variables.**
+- [ ] **Verify deployed application functions correctly with the new Firebase project.**
+
+---
+
+**This log is up to date as of the end of this session.**
+
+## Session Date: 2025-04-24 (Animations & Bug Fixes)
+
+---
+
+## **Summary of Work Completed in This Session**
+
+### 1. **Implemented Framer Motion Animations**
+- Added animations for page transitions (Login -> Home, general routes), drawer slide-in/out, playlist grid item loading (staggered entrance), home page item appearance/hover, loading indicators, and hamburger menu interaction. This was based on a plan developed by the Designer mode.
+
+### 2. **Fixed Blank Login Screen**
+- Resolved an issue where the Login screen was blank after logout due to conflicting Framer Motion wrappers. The fix involved removing the redundant wrapper in `LoginScreen.jsx`.
+
+### 3. **Refined Playlist Grid Animation**
+- Fixed inconsistent behavior where the grid entrance animation re-ran after closing the image preview modal. The final fix uses `localStorage` to ensure the animation runs only once per playlist per session.
+
+---
+
+## **Current State of the App (as of end of session)**
+
+- **Authentication:** Works with Firebase Google sign-in (`signInWithPopup`).
+- **Storage Access:** Authenticated user with specific UID has `read`, `write`, and `list` permissions for all paths in Storage. Playlists are listing correctly (user confirmed).
+- **Build:** Application builds successfully.
+- **Deployment:** Environment variables formatted for Railway. `client/.env` ignored by Git.
+- **Playlist Drawer:** Slide-out folder selector and logout implemented. The playlist list is now scrollable, and background scrolling is prevented when the drawer is open. The hamburger button now toggles the drawer.
+- **UI/UX Smoothness:** Enhanced with Framer Motion animations for page transitions (Login -> Home, general routes), drawer slide-in/out, playlist grid item loading (staggered entrance), home page item appearance/hover, loading indicators, and hamburger menu interaction.
 
 ---
 

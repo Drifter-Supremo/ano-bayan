@@ -47,10 +47,10 @@
 
 ### **Phase 2.5: Polish & Animations**
 - [x] Slideshow transitions with Framer Motion (fade, fade+zoom)
-- [ ] Drawer open/close and backdrop animations
-- [ ] Playlist thumbnail hover and grid animations
-- [ ] Loading skeletons and progress indicators
-- [ ] Responsive tweaks and finishing touches
+- [x] Drawer open/close and backdrop animations
+- [x] Playlist thumbnail hover and grid animations
+- [x] Loading skeletons and progress indicators
+- [x] Responsive tweaks and finishing touches
 
 ---
 
