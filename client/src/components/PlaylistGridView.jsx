@@ -4,6 +4,7 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
 import Slideshow from "./Slideshow";
 import { motion } from "framer-motion";
+import SkeletonItem from "./SkeletonItem";
 
 const storage = getStorage(app);
 
@@ -89,20 +90,18 @@ export default function PlaylistGridView() { // Removed prop
 
   if (loading) {
     return (
-      <motion.div
-        className="text-center py-10 text-xl text-white/70"
-        animate={{
-          opacity: [0.7, 0.9, 0.7],
-          scale: [1, 1.02, 1]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 1.5,
-          ease: "easeInOut"
-        }}
-      >
-        Loading images...
-      </motion.div>
+      <div className="min-h-screen bg-[#032934] p-4">
+        <motion.div
+          className="max-w-6xl mx-auto grid grid-cols-3 gap-4"
+          variants={containerVariants}
+          initial={hasAnimatedInitially ? false : "hidden"}
+          animate="show"
+        >
+          {Array(9).fill().map((_, i) => (
+            <SkeletonItem key={`skeleton-${i}`} />
+          ))}
+        </motion.div>
+      </div>
     );
   }
   if (error) {
