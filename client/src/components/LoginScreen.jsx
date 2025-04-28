@@ -25,7 +25,7 @@ export default function LoginScreen() {
   // Removed handleSignIn wrapper as it only contained a log
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center gap-8 bg-[#032934] p-4 sm:p-6">
+    <div className="fixed inset-0 min-h-screen w-full flex flex-col items-center justify-center gap-8 bg-[#032934] p-4 sm:p-6 overflow-hidden">
       <div className="w-full max-w-[24rem] sm:max-w-[28rem] relative">
         <img
           src="/ano-bayan-landing-page-image.png"
