@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"; // Removed useState
 import { signInWithGoogle, auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { onAuthStateChanged } from "firebase/auth"; // Removed getRedirectResult
 
 export default function LoginScreen() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Listener: Handles cases where user is already logged in when visiting /login
   useEffect(() => {
@@ -25,16 +26,22 @@ export default function LoginScreen() {
   // Removed handleSignIn wrapper as it only contained a log
 
   return (
-    <div className="fixed inset-0 min-h-screen w-full flex flex-col items-center justify-center gap-8 bg-[#032934] p-4 sm:p-6 overflow-hidden">
+    <motion.div key={location.key} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="fixed inset-0 min-h-screen w-full flex flex-col items-center justify-center gap-8 bg-[#032934] p-4 sm:p-6 overflow-hidden">
       <div className="w-full max-w-[24rem] sm:max-w-[28rem] relative">
-        <img
+        <motion.img
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           src="/ano-bayan-landing-page-image.png"
           alt="Ano Bayan Landing"
           className="w-full h-auto aspect-square object-contain drop-shadow-xl rounded-2xl"
           draggable={false}
         />
       </div>
-      <button
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         onClick={signInWithGoogle}
         className="w-full max-w-[20rem] flex items-center justify-center px-6 py-3 border-2 border-gray-300 rounded-xl shadow-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200"
       >
@@ -46,7 +53,7 @@ export default function LoginScreen() {
           <path fill="none" d="M0 0h48v48H0z"></path>
         </svg>
         Sign in with Google
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }
