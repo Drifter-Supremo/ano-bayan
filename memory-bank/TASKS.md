@@ -57,6 +57,7 @@ A private, password-protected, fully animated slideshow web app for curated imag
 
 \#\#\# 3.1 Password Login
 \- \[x] Create login page
+\- \[x] Fix login screen animations (logo and sign-in button)
 \- \[ \] Set up Express session or token-based auth
 \- \[ \] Add bcrypt password check (hardcoded password is fine for MVP)
 \- \[ \] Store session securely (cookie or in-memory)

@@ -70,6 +70,11 @@
    - Optimized image constraints (max-w-[24rem] sm:max-w-[28rem])
    - Full-width button with max-width
    - Enhanced spacing, shadows, and transitions
+   - Fixed login screen animations by:
+     * Converting wrapper to motion.div
+     * Adding key={location.key} to force remount
+     * Upgrading logo and button to motion components
+   - Animations now play correctly after logout
 
-The changes resulted in perfect centering without scrolling issues across all screen sizes while maintaining a clean, modern aesthetic.
+The changes resulted in perfect centering and animation behavior across all screen sizes while maintaining a clean, modern aesthetic.
 **This log is up to date as of the end of this session.**
