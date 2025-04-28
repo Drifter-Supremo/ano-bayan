@@ -31,6 +31,11 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   const touchStart = useRef(null);
   const slideshowRef = useRef(null);
   const controlsTimeout = useRef(null);
+  const isCoarse = typeof window !== "undefined" &&
+                   window.matchMedia("(pointer: coarse)").matches;
+  const [zoomed, setZoomed]   = useState(false);
+  const [origin, setOrigin]   = useState("50% 50%");
+  const lastTapRef            = useRef(0);
 
   // Store original images separately
   const originalImages = useRef(images);
@@ -63,6 +68,9 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
     // Intentionally omitting list and index from dependencies to avoid loops
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlay, originalImages]);
+
+  // Reset zoom whenever the slide, autoplay, or fullscreen changes
+  useEffect(() => setZoomed(false), [index, autoPlay, isFullscreen]);
 
   // Adjust duration based on orientation
   const onLoad = e => {
@@ -148,7 +156,26 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
     }
     handleInteraction();
   };
+  const toggleZoom = (touch) => {
+    if (!isCoarse || autoPlay) return;             // desktop or autoplay → ignore
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) {          // double-tap detected
+      // Where did the finger land?
+      const img = slideshowRef.current.querySelector("img");
+      if (img) {
+        const rect = img.getBoundingClientRect();
+        const x = ((touch.clientX - rect.left) / rect.width)  * 100;
+        const y = ((touch.clientY - rect.top)  / rect.height) * 100;
+        setOrigin(`${x}% ${y}%`);
+      }
+      setZoomed(z => !z);                          // toggle in/out
+      touch.preventDefault();                      // stop browser zoom
+    }
+    lastTapRef.current = now;
+  };
+
   const handleTouchEnd = e => {
+    toggleZoom(e.changedTouches[0]);               // NEW
     // Only trigger swipe if single touch throughout
     if (touchStart.current == null || e.changedTouches.length !== 1) return;
     const dx = e.changedTouches[0].clientX - touchStart.current;
@@ -171,7 +198,7 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   return (
     <div
       ref={slideshowRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 select-none overflow-hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 select-none overflow-hidden touch-zoom-container"
       onMouseMove={handleInteraction}
       onClick={handleInteraction} // Show controls on click anywhere
       onTouchStart={handleTouchStart}
@@ -189,6 +216,7 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
           exit="exit"
           transition={transition}
           className="object-contain max-h-full max-w-full block"
+          style={zoomed ? { transform: "scale(2)", transformOrigin: origin } : {}}
           draggable={false}
         />
       </AnimatePresence>
