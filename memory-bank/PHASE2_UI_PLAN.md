@@ -38,6 +38,7 @@
 ### **Phase 2.4: Settings & Auth UI**
 - [x] Minimal login page and authentication guard (Firebase Google Auth)
 - [x] Styled Google Sign-in button with logo
+- [x] Implemented login screen fixes to address centering and scrolling issues across all screen sizes. Optimized for mobile with responsive padding, image constraints, and full-width button.
 
 *Note: Auth now integrated with Supabase. Environment variable loading was fixed by placing .env in the client directory.*
 

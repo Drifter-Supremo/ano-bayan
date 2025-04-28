@@ -25,16 +25,18 @@ export default function LoginScreen() {
   // Removed handleSignIn wrapper as it only contained a log
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#032934]">
-      <img
-        src="/ano-bayan-landing-page-image.png"
-        alt="Ano Bayan Landing"
-        className="w-[28rem] h-[28rem] object-contain mb-8 drop-shadow-lg rounded-xl"
-        draggable={false}
-      />
+    <div className="h-full w-full flex flex-col items-center justify-center gap-8 bg-[#032934] p-4 sm:p-6">
+      <div className="w-full max-w-[24rem] sm:max-w-[28rem] relative">
+        <img
+          src="/ano-bayan-landing-page-image.png"
+          alt="Ano Bayan Landing"
+          className="w-full h-auto aspect-square object-contain drop-shadow-xl rounded-2xl"
+          draggable={false}
+        />
+      </div>
       <button
-        onClick={signInWithGoogle} // Call directly
-        className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
+        onClick={signInWithGoogle}
+        className="w-full max-w-[20rem] flex items-center justify-center px-6 py-3 border-2 border-gray-300 rounded-xl shadow-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200"
       >
         <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
