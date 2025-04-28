@@ -27,12 +27,13 @@ A private, password-protected, fully animated slideshow web app for curated imag
 
 \#\# 🎨 PHASE 2: FRONTEND UI
 
-\#\#\# 2.1 Slideshow Component  
+\#\#\# 2.1 Slideshow Component
 \- \[ \] Load images from API (do not hardcode paths)
 \- \[x] Display one image at a time with animation
 \- [x] Add manual nav: next / prev buttons
 \- \[x] Add auto-play mode with adjustable timing
 \- \[x] Add shuffle mode
+\- \[x] Add double-tap zoom with spring animation
 
 \#\#\# 2.2 UI Features
 \- \[x] Fullscreen toggle

@@ -73,6 +73,13 @@
 - Applied `touch-zoom-container` class to the main container div within `Slideshow.jsx`.
 - Verified correct functionality on touch devices.
 
+### Spring-Based Double-Tap Zoom
+- Refactored `Slideshow.jsx` to implement a spring animation for double-tap zoom.
+- Added `autoPlayRef` to prevent zoom during autoplay.
+- Updated `toggleZoom` to calculate origin based on tap location.
+- Modified `handleTouchEnd` to pass the event object.
+- Wrapped `motion.img` in a `motion.div` to handle the scale animation with spring physics.
+
 ### 1. **Login Screen Fixes**
 - Removed conflicting flex centering from body element in index.css
 - Added proper overflow and overscroll behavior controls

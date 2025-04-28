@@ -37,6 +37,10 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   const [origin, setOrigin]   = useState("50% 50%");
   const lastTapRef            = useRef(0);
 
+  // keep the latest autoplay value so toggleZoom always sees the truth
+  const autoPlayRef = useRef(autoPlay);
+  useEffect(() => { autoPlayRef.current = autoPlay; }, [autoPlay]);
+
   // Store original images separately
   const originalImages = useRef(images);
 
@@ -156,26 +160,26 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
     }
     handleInteraction();
   };
-  const toggleZoom = (touch) => {
-    if (!isCoarse || autoPlay) return;             // desktop or autoplay → ignore
+  const toggleZoom = (e) => {
+    if (!isCoarse || autoPlayRef.current) return;   // ignore while autoplay is running
     const now = Date.now();
-    if (now - lastTapRef.current < 300) {          // double-tap detected
-      // Where did the finger land?
-      const img = slideshowRef.current.querySelector("img");
+    if (now - lastTapRef.current < 300) {           // double-tap detected
+      const touch = e.changedTouches[0];
+      const img   = slideshowRef.current.querySelector("img");
       if (img) {
         const rect = img.getBoundingClientRect();
         const x = ((touch.clientX - rect.left) / rect.width)  * 100;
         const y = ((touch.clientY - rect.top)  / rect.height) * 100;
-        setOrigin(`${x}% ${y}%`);
+        setOrigin(`${x}% ${y}%`);                   // zoom toward tap point
       }
-      setZoomed(z => !z);                          // toggle in/out
-      touch.preventDefault();                      // stop browser zoom
+      setZoomed(z => !z);                           // toggle zoom
+      e.preventDefault();                           // stop browser double-tap zoom
     }
     lastTapRef.current = now;
   };
 
   const handleTouchEnd = e => {
-    toggleZoom(e.changedTouches[0]);               // NEW
+    toggleZoom(e);
     // Only trigger swipe if single touch throughout
     if (touchStart.current == null || e.changedTouches.length !== 1) return;
     const dx = e.changedTouches[0].clientX - touchStart.current;
@@ -205,20 +209,25 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
       onTouchEnd={handleTouchEnd}
     >
       <AnimatePresence initial={false} mode="wait">
-        <motion.img
-          key={imgUrl}
-          src={imgUrl}
-          alt=""
-          onLoad={onLoad}
-          variants={variants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={transition}
-          className="object-contain max-h-full max-w-full block"
-          style={zoomed ? { transform: "scale(2)", transformOrigin: origin } : {}}
-          draggable={false}
-        />
+        <motion.div
+          key={imgUrl}                      // keeps exit / enter keyed on slide
+          style={{ transformOrigin: origin }}
+          animate={{ scale: zoomed ? 2 : 1 }}
+          transition={{ type: "spring", stiffness: 160, damping: 18, mass: 0.8 }}
+        >
+          <motion.img
+            src={imgUrl}
+            alt=""
+            onLoad={onLoad}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={transition}
+            className="object-contain max-h-full max-w-full block"
+            draggable={false}
+          />
+        </motion.div>
       </AnimatePresence>
 
       {/* --- Unified Controls Container --- */}
