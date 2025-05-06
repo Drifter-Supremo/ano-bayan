@@ -165,14 +165,19 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
     const now = Date.now();
     if (now - lastTapRef.current < 300) {           // double-tap detected
       const touch = e.changedTouches[0];
-      const img   = slideshowRef.current.querySelector("img");
+      // Find the image element
+      const img = slideshowRef.current.querySelector('img');
       if (img) {
         const rect = img.getBoundingClientRect();
-        const x = ((touch.clientX - rect.left) / rect.width)  * 100;
-        const y = ((touch.clientY - rect.top)  / rect.height) * 100;
+        const x = ((touch.clientX - rect.left) / rect.width) * 100;
+        const y = ((touch.clientY - rect.top) / rect.height) * 100;
         setOrigin(`${x}% ${y}%`);                   // zoom toward tap point
+        setZoomed(z => !z);
+      } else {
+        // Fallback to center zoom if image not found
+        setOrigin('50% 50%');
+        setZoomed(z => !z);
       }
-      setZoomed(z => !z);                           // toggle zoom
       e.preventDefault();                           // stop browser double-tap zoom
     }
     lastTapRef.current = now;
@@ -202,7 +207,7 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
   return (
     <div
       ref={slideshowRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 select-none overflow-hidden touch-zoom-container"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 select-none overflow-hidden touch-zoom-container h-screen"
       onMouseMove={handleInteraction}
       onClick={handleInteraction} // Show controls on click anywhere
       onTouchStart={handleTouchStart}
@@ -224,7 +229,7 @@ export default function Slideshow({ images = [], initialIndex = 0, onClose }) {
             animate="animate"
             exit="exit"
             transition={transition}
-            className="object-contain max-h-full max-w-full block"
+            style={{ maxWidth: '100%', maxHeight: '100vh', objectFit: 'contain', display: 'block' }}
             draggable={false}
           />
         </motion.div>
